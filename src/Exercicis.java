@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+import java.util.Map;
 import java.util.function.*;
 
 public class Exercicis {
@@ -7,13 +9,21 @@ public class Exercicis {
      */
     public static Supplier<String> helloSupplier() {
 
+        Supplier <String> helloSupplier= () -> "Hello";
+
+
+
+        return helloSupplier;
     }
 
     /**
      * Torna un Predicate que mira si l'string és buit
      */
     public static Predicate<String> isEmptyPredicate() {
+        Predicate<String> isEmptyPredicate = (s) -> s.isEmpty();
 
+
+        return isEmptyPredicate;
     }
 
     /**
@@ -21,14 +31,20 @@ public class Exercicis {
      * n vegades, on n es passa com a argument de la funció.
      */
     public static BiFunction<String, Integer, String> stringMultiplier() {
- 
+
+        BiFunction<String, Integer, String> stringMultiplier = (s,n) -> s.repeat(n);
+
+        return stringMultiplier;
     }
 
     /**
      * Torna un Function que converteix un BigDecimal a String que comença pel símbol "$"
      */
     public static Function<BigDecimal, String> toDollarStringFunction() {
- 
+
+        Function<BigDecimal, String> toDollarStringFunction = (n) -> "$"+n  ;
+
+        return toDollarStringFunction;
     }
 
     /**
@@ -37,14 +53,14 @@ public class Exercicis {
      * dins aquest rang.
      */
     public static Predicate<String> lengthInRangePredicate(int min, int max) {
-
+        return null;
     }
 
     /**
      * Retorna un Supplier de números enters aleatoris
      */
     public static IntSupplier randomIntSupplier() {
-
+        return null;
     }
 
 
@@ -53,28 +69,28 @@ public class Exercicis {
      * retorna un número aleatori dins aquest límit
      */
     public static IntUnaryOperator boundedRandomIntSupplier() {
-
+        return null;
     }
 
     /**
      * Retorna un IntUnaryOperator que calcula un quadrat d'un número
      */
     public static IntUnaryOperator intSquareOperation() {
-
+        return null;
     }
 
     /**
      * Retorna un LongBinaryOperator que realitza l'operació de suma
      */
     public static LongBinaryOperator longSumOperation() {
-
+        return null;
     }
 
     /**
      * Retorna un ToIntFunction<String> que converteix un String a un Integer
      */
     public static ToIntFunction<String> stringToIntConverter() {
-
+        return null;
     }
 
     /**
@@ -82,14 +98,14 @@ public class Exercicis {
      * que realitza la funció f(x) = n * x
      */
     public static Supplier<IntUnaryOperator> nMultiplyFunctionSupplier(int n) {
-
+        return null;
     }
 
     /**
      * Retorna una funció que composa funcions amb la funció trim() de String
      */
     public static UnaryOperator<Function<String, String>> composeWithTrimFunction() {
-
+        return null;
     }
 
     /**
@@ -97,7 +113,7 @@ public class Exercicis {
      * Aquest thread s'iniciarà quan es cridi al mètode "get()" del supplier.
      */
     public static Supplier<Thread> runningThreadSupplier(Runnable runnable) {
-
+        return null;
     }
 
     /**
@@ -105,7 +121,7 @@ public class Exercicis {
      * dins un nou fil (thread)
      */
     public static Consumer<Runnable> newThreadRunnableConsumer() {
-        
+        return null;
     }
 
     /**
@@ -113,7 +129,7 @@ public class Exercicis {
      * un Supplier d'un Thread que s'ha creat per aquest Runnable.
      */
     public static Function<Runnable, Supplier<Thread>> runnableToThreadSupplierFunction() {
-
+        return null;
     }
 
     /**
@@ -129,7 +145,7 @@ public class Exercicis {
      * - Si el IntPredicate no es compleix, retorna el mateix element que s'ha rebut
      */
     public static BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator> functionToConditionalFunction() {
-
+        return null;
     }
 
     /**
@@ -142,12 +158,13 @@ public class Exercicis {
      * funció que retorna el mateix paràmetre que li passem.
      */
     public static BiFunction<Map<String, IntUnaryOperator>, String, IntUnaryOperator> functionLoader() {
-
+        return null;
     }
 
     /**
      * Retorna un Supplier d'un Supplier d'un Supplier de l'string "BEN FET!"
      */
     public static Supplier<Supplier<Supplier<String>>> trickyWellDoneSupplier() {
+        return null;
     }
 }
