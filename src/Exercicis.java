@@ -9,21 +9,17 @@ public class Exercicis {
      */
     public static Supplier<String> helloSupplier() {
 
-        Supplier <String> helloSupplier= () -> "Hello";
+        return  () -> "Hello";
 
-
-
-        return helloSupplier;
     }
 
     /**
      * Torna un Predicate que mira si l'string és buit
      */
     public static Predicate<String> isEmptyPredicate() {
-        Predicate<String> isEmptyPredicate = (s) -> s.isEmpty();
 
+        return  (s) -> s.isEmpty();
 
-        return isEmptyPredicate;
     }
 
     /**
@@ -32,9 +28,8 @@ public class Exercicis {
      */
     public static BiFunction<String, Integer, String> stringMultiplier() {
 
-        BiFunction<String, Integer, String> stringMultiplier = (s,n) -> s.repeat(n);
+        return (s,n) -> s.repeat(n);
 
-        return stringMultiplier;
     }
 
     /**
@@ -42,9 +37,8 @@ public class Exercicis {
      */
     public static Function<BigDecimal, String> toDollarStringFunction() {
 
-        Function<BigDecimal, String> toDollarStringFunction = (n) -> "$"+n  ;
+        return  (n) -> "$"+n  ;
 
-        return toDollarStringFunction;
     }
 
     /**
@@ -53,14 +47,25 @@ public class Exercicis {
      * dins aquest rang.
      */
     public static Predicate<String> lengthInRangePredicate(int min, int max) {
-        return null;
+
+        return new Predicate<String>() {
+            @Override
+            public boolean test(String s) {
+                return s.length() >= min && s.length() <= max;
+            }
+        };
+
+       // Predicate<String> lengthInRangePredicate =(s) ->  max<= s.length() && s.length() >=min;
+
+        //return lengthInRangePredicate;
     }
 
     /**
      * Retorna un Supplier de números enters aleatoris
      */
     public static IntSupplier randomIntSupplier() {
-        return null;
+       return () -> (int)(Math.random()*100);
+
     }
 
 
@@ -69,28 +74,30 @@ public class Exercicis {
      * retorna un número aleatori dins aquest límit
      */
     public static IntUnaryOperator boundedRandomIntSupplier() {
-        return null;
+
+        return (num) -> (int)(Math.random()*num);
+
     }
 
     /**
      * Retorna un IntUnaryOperator que calcula un quadrat d'un número
      */
     public static IntUnaryOperator intSquareOperation() {
-        return null;
+        return (n) -> (int)Math.pow(n,2);
     }
 
     /**
      * Retorna un LongBinaryOperator que realitza l'operació de suma
      */
     public static LongBinaryOperator longSumOperation() {
-        return null;
+        return (num1,num2)-> num1 + num2;
     }
 
     /**
      * Retorna un ToIntFunction<String> que converteix un String a un Integer
      */
     public static ToIntFunction<String> stringToIntConverter() {
-        return null;
+        return (s)->Integer.parseInt(s);
     }
 
     /**
@@ -98,14 +105,16 @@ public class Exercicis {
      * que realitza la funció f(x) = n * x
      */
     public static Supplier<IntUnaryOperator> nMultiplyFunctionSupplier(int n) {
-        return null;
+        return () -> (x) -> n * x;
     }
 
     /**
      * Retorna una funció que composa funcions amb la funció trim() de String
      */
     public static UnaryOperator<Function<String, String>> composeWithTrimFunction() {
-        return null;
+
+         return (f) -> f.compose((s)-> s.trim());
+
     }
 
     /**
@@ -113,7 +122,11 @@ public class Exercicis {
      * Aquest thread s'iniciarà quan es cridi al mètode "get()" del supplier.
      */
     public static Supplier<Thread> runningThreadSupplier(Runnable runnable) {
-        return null;
+        return () -> {
+            Thread t = new Thread(runnable);
+            t.start();
+            return t;
+        };
     }
 
     /**
@@ -121,7 +134,9 @@ public class Exercicis {
      * dins un nou fil (thread)
      */
     public static Consumer<Runnable> newThreadRunnableConsumer() {
-        return null;
+
+      return (Runnable) -> (new Thread(Runnable)).start();
+
     }
 
     /**
@@ -129,7 +144,11 @@ public class Exercicis {
      * un Supplier d'un Thread que s'ha creat per aquest Runnable.
      */
     public static Function<Runnable, Supplier<Thread>> runnableToThreadSupplierFunction() {
-        return null;
+      return (Runnable) -> () ->{
+            Thread t = new Thread(Runnable);
+            t.start();
+            return t;
+        };
     }
 
     /**
@@ -145,7 +164,15 @@ public class Exercicis {
      * - Si el IntPredicate no es compleix, retorna el mateix element que s'ha rebut
      */
     public static BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator> functionToConditionalFunction() {
-        return null;
+
+       return  (IntUnaryOperator,IntPredicate) -> (i) -> {
+           if (IntPredicate.test(i)){
+             return  IntUnaryOperator.applyAsInt(i);
+           }
+           return i;
+
+       };
+
     }
 
     /**
@@ -158,13 +185,19 @@ public class Exercicis {
      * funció que retorna el mateix paràmetre que li passem.
      */
     public static BiFunction<Map<String, IntUnaryOperator>, String, IntUnaryOperator> functionLoader() {
-        return null;
+        return (m,s) -> {
+            if(m.containsKey(s)) {
+                return m.get(s);
+            }
+            return (i) -> i;
+        };
     }
 
     /**
      * Retorna un Supplier d'un Supplier d'un Supplier de l'string "BEN FET!"
      */
     public static Supplier<Supplier<Supplier<String>>> trickyWellDoneSupplier() {
-        return null;
+
+        return () -> () -> () -> "BEN FET!";
     }
 }
